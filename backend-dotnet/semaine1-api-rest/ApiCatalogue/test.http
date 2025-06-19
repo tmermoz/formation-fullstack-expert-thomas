@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:5278
+
+### Test - GET - Récupération de tous les produits
+GET {{baseUrl}}/api/produits
+Accept: application/json
+
+### Test - GET - Recuperation des produits selon la categorie
+GET {{baseUrl}}/api/Produits?categorie=Audio
+Accept: application/json
+
+### Test - GET - Recuperation des produits selon la categorie avec une différente route
+GET {{baseUrl}}/api/Produits/search?categorie=Audio
+Accept: application/json
+
+### Test - GET - Recuperation d'un produit avec un id
+GET {{baseUrl}}/api/produits/2
+Accept: application/json
+
+### Test - GET - Recherche par catégorie, prix mamx et mot-clé
+GET {{baseUrl}}/api/produits/search?categorie=Audio&prixMax=150&searchItem=blue
+Accept: application/json
+
+### Test - POST - Création d'un produit
+POST {{baseUrl}}/api/produits
+Content-Type: application/json
+
+{
+    "nom": "Souris",
+    "prix": 19.99,
+    "categorie": "Périphériques"
+}
+
+### Test - PUT - Modification d'un produit
+PUT {{baseUrl}}/api/produits/2
+Content-Type: application/json
+
+{
+    "id": 2,
+    "nom": "Tablette",
+    "prix": 109.99,
+    "categorie": "Téléphonie"
+}
+
+### Test - DELETE - Supprimer un produit
+DELETE {{baseUrl}}/api/produits/4
+Accept: application/json
+
+
+
+
+
+
+
