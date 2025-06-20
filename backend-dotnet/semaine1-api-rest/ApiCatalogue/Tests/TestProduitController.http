@@ -16,8 +16,20 @@ Accept: application/json
 GET {{baseUrl}}/api/produits/2
 Accept: application/json
 
-### Test - GET - Recherche par catégorie, prix mamx et mot-clé
+### Test - GET - Recherche par catégorie, prix max et mot-clé
 GET {{baseUrl}}/api/produits/search?categorie=Audio&prixMax=150&searchItem=blue
+Accept: application/json
+
+### Test - GET - Recherche par groupe de categorie
+GET {{baseUrl}}/api/produits/group-by-categorie/
+Accept: application/json
+
+### Test - GET - Recherche par join entre produit et categorie
+GET {{baseUrl}}/api/produits/produits-avec-categorie/
+Accept: application/json
+
+### Test - GET - Recherche des statistiques par prix
+GET {{baseUrl}}/api/produits/stats-prix/
 Accept: application/json
 
 ### Test - POST - Création d'un produit
@@ -45,7 +57,27 @@ Content-Type: application/json
 DELETE {{baseUrl}}/api/produits/4
 Accept: application/json
 
+### Test 1 : Produits avec minPrix = 100, maxPrix = 800, catégorie = Audio
+GET https://localhost:7286/api/Produits/filtre?minPrix=100&maxPrix=800&categorie=Audio
+Accept: application/json
 
+###
+
+### Test 2 : Tous les produits au-dessus de 200 €
+GET https://localhost:7286/api/Produits/filtre?minPrix=200
+Accept: application/json
+
+###
+
+### Test 3 : Produits dans la catégorie Téléphonie uniquement
+GET https://localhost:7286/api/Produits/filtre?categorie=Téléphonie
+Accept: application/json
+
+###
+
+### Test 4 : Aucun filtre — doit retourner tous les produits
+GET https://localhost:7286/api/Produits/filtre
+Accept: application/json
 
 
 

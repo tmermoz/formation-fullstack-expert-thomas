@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:5278
+
+### Test - GET - Recherche par ville et age
+GET {{baseUrl}}/api/clients/search?ville=Lyon&age=35
+Accept: application/json

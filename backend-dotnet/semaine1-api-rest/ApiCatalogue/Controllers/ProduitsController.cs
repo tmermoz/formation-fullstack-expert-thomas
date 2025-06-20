@@ -9,12 +9,26 @@ namespace ApiCatalogue.Controllers
     [Route("api/[controller]")]
     public class ProduitsController : ControllerBase
     {
+        private readonly ILogger<ProduitsController> _logger;
+
         private static readonly List<Produit> Produits = new()
         {
             new Produit {Id = 1, Nom = "Ordinateur portable", Prix = 999.99m, Categorie = "Informatique"},
             new Produit {Id = 2, Nom = "Smartphone", Prix = 749.99m, Categorie = "Téléphonie"},
             new Produit {Id = 3, Nom = "Ecouteurs bluetooth", Prix = 129.00m, Categorie = "Audio"}
         };
+
+        private static readonly List<Categorie> Categories = new()
+        {
+            new Categorie { Nom = "Informatique", Description = "Ordinateurs et périphériques" },
+            new Categorie { Nom = "Téléphonie", Description = "Smartphones et accessoires" },
+            new Categorie { Nom = "Audio", Description = "Équipements audio" }
+        };
+
+        public ProduitsController(ILogger<ProduitsController> logger)
+        {
+            _logger = logger;
+        }
 
         #region ancien code 
         // [HttpGet]
@@ -160,7 +174,7 @@ namespace ApiCatalogue.Controllers
         /// <returns>Liste de produits filtrés</returns>
         [HttpGet("search")]
         public ActionResult<IEnumerable<Produit>> GetByCategorie(
-            [FromQuery] string? categorie, 
+            [FromQuery] string? categorie,
             [FromQuery] decimal? prixMax,
             [FromQuery] string? searchItem)
         {
@@ -174,10 +188,78 @@ namespace ApiCatalogue.Controllers
 
             if (!string.IsNullOrWhiteSpace(searchItem))
                 result = result.Where(p => p.Nom.ToLower().Contains(searchItem.ToLower()));
-                
+
             return Ok(result);
         }
 
+        [HttpGet("group-by-categorie")]
+        public IActionResult GetProduitsGroupesParCategorie()
+        {
+            var groupes = Produits
+                .GroupBy(p => p.Categorie)
+                .Select(g => new
+                {
+                    Categorie = g.Key,
+                    NombreProduits = g.Count(),
+                    Produits = g.Select(p => new { p.Nom, p.Prix })
+                });
+
+            return Ok(groupes);
+        }
+
+        [HttpGet("produits-avec-categorie")]
+        public IActionResult GetProduitsAvecDetailsCategorie()
+        {
+            var resultats = Produits
+                .Join(Categories,
+                    produit => produit.Categorie,
+                    categorie => categorie.Nom,
+                    (produit, categorie) => new
+                    {
+                        produit.Nom,
+                        produit.Prix,
+                        Categorie = categorie.Nom,
+                        categorie.Description
+                    });
+
+            return Ok(resultats);
+        }
+
+        [HttpGet("stats-prix")]
+        public IActionResult GetStatistiquesPrix()
+        {
+            var stats = Produits
+                .GroupBy(p => p.Categorie)
+                .Select(g => new
+                {
+                    Categorie = g.Key,
+                    NombreProduits = g.Count(),
+                    PrixMoyen = g.Average(p => p.Prix),
+                    PrixMax = g.Max(p => p.Prix),
+                    PrixMin = g.Min(p => p.Prix)
+                });
+
+            return Ok(stats);
+        }
+
+        [HttpGet("filtre")]
+        public IActionResult FiltrerProduits(
+            [FromQuery] decimal? minPrix,
+            [FromQuery] decimal? maxPrix,
+            [FromQuery] string? categorie)
+        {
+            _logger.LogInformation("Filtrage des produits - minPrix: {MinPrix}, maxPrix: {MaxPrix}, catégorie: {Categorie}",
+                                    minPrix, maxPrix, categorie);
+
+            var produitsFiltres = Produits
+                .Where(p =>
+                    (!minPrix.HasValue || p.Prix >= minPrix) &&
+                    (!maxPrix.HasValue || p.Prix <= maxPrix) &&
+                    (string.IsNullOrEmpty(categorie) || p.Categorie == categorie)
+                );
+
+            return Ok(produitsFiltres);
+        }
 
     }
 }

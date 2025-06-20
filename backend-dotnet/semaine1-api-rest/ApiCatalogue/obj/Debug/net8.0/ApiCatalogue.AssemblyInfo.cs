@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiCatalogue")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fde2d50389db10d2c4a8321b44ee34301d3aa3a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba737214eb908bfa1e03e124da818c1267eda9ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiCatalogue")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiCatalogue")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

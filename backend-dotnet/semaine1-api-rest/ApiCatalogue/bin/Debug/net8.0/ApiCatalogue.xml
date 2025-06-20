@@ -49,6 +49,26 @@
             <param name="searchItem">caractère de recherche par nom du produit</param>
             <returns>Liste de produits filtrés</returns>
         </member>
+        <member name="T:ApiCatalogue.Models.Client">
+            <summary>
+            Représente les clients
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Nom">
+            <summary>
+            Nom du client
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Age">
+            <summary>
+            Age du client
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Ville">
+            <summary>
+            Ville du client
+            </summary>
+        </member>
         <member name="T:ApiCatalogue.Models.Produit">
             <summary>
             Représente un produit dans le catalogue.

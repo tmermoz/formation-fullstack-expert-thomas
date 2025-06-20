@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:5278
+
+### Test - GET - Recherche des statistiques par ville
+GET {{baseUrl}}/api/statistiques/produits-par-ville/
+Accept: application/json
