@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug testsunitaires",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/testsunitaires/bin/Debug/net8.0/testsunitaires.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/testsunitaires",
+      "stopAtEntry": false,
+      "console": "internalConsole",
+      "justMyCode": false
+    }
+  ]
+}

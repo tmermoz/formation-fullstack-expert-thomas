@@ -1,0 +1,175 @@
+{
+  "format": 1,
+  "restore": {
+    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj": {}
+  },
+  "projects": {
+    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
+        "projectName": "ApiCatalogue",
+        "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
+        "packagesPath": "C:\\Users\\tmagd\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tmagd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj",
+        "projectName": "TestsUnitaires",
+        "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj",
+        "packagesPath": "C:\\Users\\tmagd\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tmagd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
+                "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

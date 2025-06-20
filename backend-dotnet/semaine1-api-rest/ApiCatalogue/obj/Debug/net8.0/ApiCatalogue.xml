@@ -11,21 +11,21 @@
             <param name="categorie">Catégorie du produit à filtrer (optionnelle)</param>
             <returns>Liste des produits (filtrée ou complète)</returns>
         </member>
-        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetProduitById(System.Int32)">
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetProduitByIdAsync(System.Int32)">
             <summary>
             Retourne le produit selon l'id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiCatalogue.Controllers.ProduitsController.AddProduit(ApiCatalogue.Models.Produit)">
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.AddProduitAsync(ApiCatalogue.Models.Produit)">
             <summary>
             Crée un nouveau produit
             </summary>
             <param name="produit">Produit à ajouter à la liste</param>
             <returns>Produit créé avec son identifiant</returns>
         </member>
-        <member name="M:ApiCatalogue.Controllers.ProduitsController.UpdateProduit(System.Int32,ApiCatalogue.Models.Produit)">
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.UpdateProduitAsync(System.Int32,ApiCatalogue.Models.Produit)">
             <summary>
             Met à jour un produit existant
             </summary>
@@ -33,14 +33,14 @@
             <param name="produitMaj">Données du produit mises à jour</param>
             <returns>Code 204 si succès, 404 si non trouvé</returns>
         </member>
-        <member name="M:ApiCatalogue.Controllers.ProduitsController.DeleteProduit(System.Int32)">
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.DeleteProduitAsync(System.Int32)">
             <summary>
             Supprime le produit existant
             </summary>
             <param name="id">Identifiant du produit à supprimer</param>
             <returns>Code 204 si succès, 404 si non trouvé</returns>
         </member>
-        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetByCategorie(System.String,System.Nullable{System.Decimal},System.String)">
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetByCategorieAsync(System.String,System.Nullable{System.Decimal},System.String)">
             <summary>
             Recherche les produits selon différents critères
             </summary>
@@ -93,6 +93,40 @@
             <summary>
             Catégorie du produit.
             </summary>
+        </member>
+        <member name="T:ApiCatalogue.Repositories.IAchatRepository">
+            <summary>
+            Interface for the Achat repository.
+            </summary>
+        </member>
+        <member name="M:ApiCatalogue.Repositories.IAchatRepository.GetAllAchatsAsync">
+            <summary>
+            Gets all achats.
+            </summary>
+            <returns>A list of achats.</returns>
+        </member>
+        <member name="M:ApiCatalogue.Repositories.IClientRepository.GetAllClientsAsync">
+            <summary>
+            Gets all clients.
+            </summary>
+            <returns>A list of clients.</returns>
+        </member>
+        <member name="M:ApiCatalogue.Repositories.InMemory.ProduitRepository.GetAllProduitsAsync">
+            <summary>
+            Gets all produits.  
+            /// </summary>
+            <returns>A list of produits.</returns>
+        </member>
+        <member name="T:ApiCatalogue.Repositories.IProduitRepository">
+            <summary>
+            Interface for the Produit repository.
+            </summary>
+        </member>
+        <member name="M:ApiCatalogue.Repositories.IProduitRepository.GetAllProduitsAsync">
+            <summary>
+            Gets all produits.
+            </summary>
+            <returns>A list of produits.</returns>
         </member>
     </members>
 </doc>

@@ -1,3 +1,6 @@
+using ApiCatalogue.Repositories;
+using ApiCatalogue.Repositories.InMemory;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +14,11 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 });
+
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IProduitRepository, ProduitRepository>();
+builder.Services.AddScoped<IAchatRepository, AchatRepository>();
+
 
 var app = builder.Build();
 

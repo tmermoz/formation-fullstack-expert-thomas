@@ -2,6 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using ApiCatalogue.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.DataProtection.Repositories;
+using Microsoft.Extensions.Logging;
+using System;   
+using System.Threading.Tasks;
+using ApiCatalogue.Repositories.InMemory;
+using ApiCatalogue.Repositories;
 
 namespace ApiCatalogue.Controllers
 {
@@ -10,13 +16,7 @@ namespace ApiCatalogue.Controllers
     public class ProduitsController : ControllerBase
     {
         private readonly ILogger<ProduitsController> _logger;
-
-        private static readonly List<Produit> Produits = new()
-        {
-            new Produit {Id = 1, Nom = "Ordinateur portable", Prix = 999.99m, Categorie = "Informatique"},
-            new Produit {Id = 2, Nom = "Smartphone", Prix = 749.99m, Categorie = "Téléphonie"},
-            new Produit {Id = 3, Nom = "Ecouteurs bluetooth", Prix = 129.00m, Categorie = "Audio"}
-        };
+        private readonly IProduitRepository _produitRepository; 
 
         private static readonly List<Categorie> Categories = new()
         {
@@ -25,8 +25,9 @@ namespace ApiCatalogue.Controllers
             new Categorie { Nom = "Audio", Description = "Équipements audio" }
         };
 
-        public ProduitsController(ILogger<ProduitsController> logger)
+        public ProduitsController(ILogger<ProduitsController> logger, IProduitRepository produitRepository)
         {
+            _produitRepository = produitRepository;
             _logger = logger;
         }
 
@@ -69,13 +70,22 @@ namespace ApiCatalogue.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Produit>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<Produit>> GetProduits([FromQuery] string? categorie)
+        public async Task<ActionResult<IEnumerable<Produit>>> GetProduits([FromQuery] string? categorie)
         {
             //Console.WriteLine($"categorie : {categorie}");
+            _logger.LogInformation("Récupération des produits avec catégorie : {Categorie}", categorie);
 
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+
+            // Récupère tous les produits via le repository
             var produitsFiltres = string.IsNullOrEmpty(categorie)
-                ? Produits
-                : Produits
+                ? produits
+                : produits
                     .Where(p => p.Categorie.Equals(categorie, StringComparison.OrdinalIgnoreCase))
                     .ToList();
 
@@ -90,9 +100,18 @@ namespace ApiCatalogue.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Produit), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Produit> GetProduitById(int id)
+        public async Task<ActionResult<Produit>> GetProduitByIdAsync(int id)
         {
-            var produit = Produits.FirstOrDefault(p => p.Id == id);
+            _logger.LogInformation("Recherche du produit avec l'Id : {Id}", id);
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var produit = produits.FirstOrDefault(p => p.Id == id);
             if (produit == null)
                 return NotFound($"Aucun produit avec l'Id {id}");
 
@@ -107,17 +126,26 @@ namespace ApiCatalogue.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Produit), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Produit> AddProduit([FromBody] Produit produit)
+        public async Task<ActionResult<Produit>> AddProduitAsync([FromBody] Produit produit)
         {
             if (produit == null || string.IsNullOrWhiteSpace(produit.Nom))
                 return BadRequest("Produit invalide");
+            
+            _logger.LogInformation("Ajout d'un nouveau produit : {Nom}", produit.Nom);
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
 
             // Génère un Id unique 
-            produit.Id = Produits.Max(p => p.Id) + 1;
-            Produits.Add(produit);
+            produit.Id = produits.Max(p => p.Id) + 1;
+            await _produitRepository.AddProduitAsync(produit);
 
             // Retourne l'objet créé avec l'url pour y accéder (best practice REST)
-            return CreatedAtAction(nameof(GetProduitById), new { id = produit.Id }, produit);
+            return CreatedAtAction(nameof(GetProduitByIdAsync), new { id = produit.Id }, produit);
         }
 
         /// <summary>
@@ -130,12 +158,21 @@ namespace ApiCatalogue.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Produit> UpdateProduit(int id, [FromBody] Produit produitMaj)
+        public async Task<ActionResult<Produit>> UpdateProduitAsync(int id, [FromBody] Produit produitMaj)
         {
             if (produitMaj == null || id != produitMaj.Id)
                 return BadRequest("Données incohérentes");
 
-            var produitExistant = Produits.FirstOrDefault(p => p.Id == id);
+            _logger.LogInformation("Mise à jour du produit avec l'Id : {Id}", id);
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+
+            var produitExistant = produits.FirstOrDefault(p => p.Id == id);
             if (produitExistant == null)
                 return NotFound($"Aucun produit avec l'Id {id}");
 
@@ -154,13 +191,22 @@ namespace ApiCatalogue.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeleteProduit(int id)
+        public async Task<IActionResult> DeleteProduitAsync(int id)
         {
-            var produit = Produits.FirstOrDefault(p => p.Id == id);
+            _logger.LogInformation("Suppression du produit avec l'Id : {Id}", id);
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var produit = produits.FirstOrDefault(p => p.Id == id);
             if (produit == null)
                 return NotFound($"Aucun produit avec l'Id {id}");
 
-            Produits.Remove(produit);
+            await _produitRepository.DeleteProduitAsync(id);
 
             return NoContent();
         }
@@ -173,12 +219,28 @@ namespace ApiCatalogue.Controllers
         /// <param name="searchItem">caractère de recherche par nom du produit</param>
         /// <returns>Liste de produits filtrés</returns>
         [HttpGet("search")]
-        public ActionResult<IEnumerable<Produit>> GetByCategorie(
+        public async Task<ActionResult<IEnumerable<Produit>>> GetByCategorieAsync(
             [FromQuery] string? categorie,
             [FromQuery] decimal? prixMax,
             [FromQuery] string? searchItem)
         {
-            var result = Produits.AsEnumerable();
+            _logger.LogInformation("Recherche de produits - catégorie: {Categorie}, prixMax: {PrixMax}, searchItem: {SearchItem}",
+                                    categorie, prixMax, searchItem);
+
+            if (string.IsNullOrWhiteSpace(categorie) && !prixMax.HasValue && string.IsNullOrWhiteSpace(searchItem))
+            {
+                _logger.LogWarning("Aucun critère de recherche fourni.");
+                return BadRequest("Veuillez fournir au moins un critère de recherche.");
+            }
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var result = produits.AsEnumerable();
 
             if (!string.IsNullOrWhiteSpace(categorie))
                 result = result.Where(p => p.Categorie.ToLower() == categorie.ToLower());
@@ -193,9 +255,18 @@ namespace ApiCatalogue.Controllers
         }
 
         [HttpGet("group-by-categorie")]
-        public IActionResult GetProduitsGroupesParCategorie()
+        public async Task<IActionResult> GetProduitsGroupesParCategorieAsync()
         {
-            var groupes = Produits
+            _logger.LogInformation("Récupération des produits groupés par catégorie");
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var groupes = produits
                 .GroupBy(p => p.Categorie)
                 .Select(g => new
                 {
@@ -208,9 +279,18 @@ namespace ApiCatalogue.Controllers
         }
 
         [HttpGet("produits-avec-categorie")]
-        public IActionResult GetProduitsAvecDetailsCategorie()
+        public async Task<IActionResult> GetProduitsAvecDetailsCategorieAsync()
         {
-            var resultats = Produits
+            _logger.LogInformation("Récupération des produits avec détails de catégorie");
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var resultats = produits
                 .Join(Categories,
                     produit => produit.Categorie,
                     categorie => categorie.Nom,
@@ -226,9 +306,18 @@ namespace ApiCatalogue.Controllers
         }
 
         [HttpGet("stats-prix")]
-        public IActionResult GetStatistiquesPrix()
+        public async Task<IActionResult> GetStatistiquesPrixAsync()
         {
-            var stats = Produits
+            _logger.LogInformation("Calcul des statistiques de prix des produits");
+
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+            
+            var stats = produits
                 .GroupBy(p => p.Categorie)
                 .Select(g => new
                 {
@@ -243,15 +332,28 @@ namespace ApiCatalogue.Controllers
         }
 
         [HttpGet("filtre")]
-        public IActionResult FiltrerProduits(
+        public async Task<IActionResult> FiltrerProduitsAsync(
             [FromQuery] decimal? minPrix,
             [FromQuery] decimal? maxPrix,
             [FromQuery] string? categorie)
         {
             _logger.LogInformation("Filtrage des produits - minPrix: {MinPrix}, maxPrix: {MaxPrix}, catégorie: {Categorie}",
                                     minPrix, maxPrix, categorie);
+            
+            if (!minPrix.HasValue && !maxPrix.HasValue && string.IsNullOrEmpty(categorie))
+            {
+                _logger.LogWarning("Aucun critère de filtrage fourni.");
+                return BadRequest("Veuillez fournir au moins un critère de filtrage.");
+            }
 
-            var produitsFiltres = Produits
+            var produits = await _produitRepository.GetAllProduitsAsync();
+            if (produits == null || !produits.Any())
+            {
+                _logger.LogWarning("Aucun produit trouvé.");
+                return NotFound("Aucun produit trouvé.");
+            }
+
+            var produitsFiltres = produits
                 .Where(p =>
                     (!minPrix.HasValue || p.Prix >= minPrix) &&
                     (!maxPrix.HasValue || p.Prix <= maxPrix) &&

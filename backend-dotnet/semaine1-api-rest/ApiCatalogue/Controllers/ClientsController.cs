@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using ApiCatalogue.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using ApiCatalogue.Repositories;
+using System.Threading.Tasks;
 
 namespace ApiCatalogue.Controllers
 {
@@ -11,21 +14,16 @@ namespace ApiCatalogue.Controllers
     {
         private readonly ILogger<ClientsController> _logger;
 
-        private static readonly List<Client> Clients = new()
-        {
-            new Client { Nom = "Alice", Age = 30, Ville = "Paris" },
-            new Client { Nom = "Bob", Age = 42, Ville = "Lyon" },
-            new Client { Nom = "Claire", Age = 25, Ville = "Paris" },
-            new Client { Nom = "David", Age = 35, Ville = "Toulouse" },
-        };
+        private readonly IClientRepository _clientRepo;
 
-        public ClientsController(ILogger<ClientsController> logger)
+        public ClientsController(ILogger<ClientsController> logger, IClientRepository clientRepo)
         {
             _logger = logger;
-        }        
+            _clientRepo = clientRepo;
+        }
 
         [HttpGet("search")]
-        public ActionResult<IEnumerable<string>> GetClients(
+        public async Task<ActionResult<IEnumerable<string>>> GetClients(
             [FromQuery] string? ville,
             [FromQuery] int? age)
         {
@@ -37,7 +35,14 @@ namespace ApiCatalogue.Controllers
 
             _logger.LogInformation($"Recherche de clients pour ville = {ville} et age < {age}");
 
-            var nomsClientsFiltres = Clients
+            var clients = await _clientRepo.GetAllClientsAsync();
+            if (clients == null || !clients.Any())
+            {
+                _logger.LogInformation("Aucun client trouvé.");
+                return NotFound("Aucun client trouvé.");
+            }   
+
+            var nomsClientsFiltres = clients
                                     .Where(c =>
                                         c.Ville != null &&
                                         c.Ville.Equals(ville, StringComparison.OrdinalIgnoreCase) &&

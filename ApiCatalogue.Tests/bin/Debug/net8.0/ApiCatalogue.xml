@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiCatalogue</name>
+    </assembly>
+    <members>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetProduits(System.String)">
+            <summary>
+            Récupère la liste des produits, éventuellement filtrés par catégorie
+            </summary>
+            <param name="categorie">Catégorie du produit à filtrer (optionnelle)</param>
+            <returns>Liste des produits (filtrée ou complète)</returns>
+        </member>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetProduitById(System.Int32)">
+            <summary>
+            Retourne le produit selon l'id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.AddProduit(ApiCatalogue.Models.Produit)">
+            <summary>
+            Crée un nouveau produit
+            </summary>
+            <param name="produit">Produit à ajouter à la liste</param>
+            <returns>Produit créé avec son identifiant</returns>
+        </member>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.UpdateProduit(System.Int32,ApiCatalogue.Models.Produit)">
+            <summary>
+            Met à jour un produit existant
+            </summary>
+            <param name="id">Identifiant du produit à modifier</param>
+            <param name="produitMaj">Données du produit mises à jour</param>
+            <returns>Code 204 si succès, 404 si non trouvé</returns>
+        </member>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.DeleteProduit(System.Int32)">
+            <summary>
+            Supprime le produit existant
+            </summary>
+            <param name="id">Identifiant du produit à supprimer</param>
+            <returns>Code 204 si succès, 404 si non trouvé</returns>
+        </member>
+        <member name="M:ApiCatalogue.Controllers.ProduitsController.GetByCategorie(System.String,System.Nullable{System.Decimal},System.String)">
+            <summary>
+            Recherche les produits selon différents critères
+            </summary>
+            <param name="categorie">Catégorie du produit à filtrer</param>
+            <param name="prixMax">Prix max du produit</param>
+            <param name="searchItem">caractère de recherche par nom du produit</param>
+            <returns>Liste de produits filtrés</returns>
+        </member>
+        <member name="T:ApiCatalogue.Models.Client">
+            <summary>
+            Représente les clients
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Nom">
+            <summary>
+            Nom du client
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Age">
+            <summary>
+            Age du client
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Client.Ville">
+            <summary>
+            Ville du client
+            </summary>
+        </member>
+        <member name="T:ApiCatalogue.Models.Produit">
+            <summary>
+            Représente un produit dans le catalogue.
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Produit.Id">
+            <summary>
+            Identifiant unique du produit.
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Produit.Nom">
+            <summary>
+            Nom du produit.
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Produit.Prix">
+            <summary>
+            Prix du produit.
+            </summary>
+        </member>
+        <member name="P:ApiCatalogue.Models.Produit.Categorie">
+            <summary>
+            Catégorie du produit.
+            </summary>
+        </member>
+    </members>
+</doc>

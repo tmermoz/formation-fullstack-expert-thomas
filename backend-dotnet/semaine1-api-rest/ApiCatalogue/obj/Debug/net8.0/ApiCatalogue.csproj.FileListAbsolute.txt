@@ -5,6 +5,7 @@ C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thom
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\ApiCatalogue.runtimeconfig.json
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\ApiCatalogue.dll
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\ApiCatalogue.pdb
+C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\ApiCatalogue.xml
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -29,8 +30,7 @@ C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thom
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatal.F11DF1F4.Up2Date
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatalogue.dll
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\refint\ApiCatalogue.dll
+C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatalogue.xml
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatalogue.pdb
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatalogue.genruntimeconfig.cache
 C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ref\ApiCatalogue.dll
-C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\bin\Debug\net8.0\ApiCatalogue.xml
-C:\Users\tmagd\Documents\FORMATION_Expert_Thomas\formation-fullstack-expert-thomas\backend-dotnet\semaine1-api-rest\ApiCatalogue\obj\Debug\net8.0\ApiCatalogue.xml
