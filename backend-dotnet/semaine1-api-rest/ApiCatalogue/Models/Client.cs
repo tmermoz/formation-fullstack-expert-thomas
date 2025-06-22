@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ApiCatalogue.Models
 {
     /// <summary>
@@ -5,6 +7,9 @@ namespace ApiCatalogue.Models
     /// </summary>
     public class Client
     {
+        [Key]
+        public int Id { get; set; }  // ← Clé primaire requise
+        
         /// <summary>
         /// Nom du client
         /// </summary>

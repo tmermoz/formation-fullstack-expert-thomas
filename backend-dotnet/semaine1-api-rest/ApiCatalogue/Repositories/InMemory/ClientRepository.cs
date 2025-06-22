@@ -4,6 +4,8 @@ using ApiCatalogue.Models;
 using ApiCatalogue.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiCatalogue.Data;
+using Microsoft.EntityFrameworkCore;
 
 // <summary>
 // InMemory implementation of the IClientRepository interface.  
@@ -13,21 +15,18 @@ namespace ApiCatalogue.Repositories.InMemory
 {
     public class ClientRepository : IClientRepository
     {
-        private static readonly List<Client> Clients = new()
-        {
-            new() { Nom = "Alice", Age = 30, Ville = "Paris" },
-            new() { Nom = "Bob", Age = 42, Ville = "Lyon" },
-            new() { Nom = "Claire", Age = 25, Ville = "Paris" },
-            new() { Nom = "David", Age = 35, Ville = "Toulouse" },
-        };
+        private readonly CatalogueDbContext _context;
 
-        public Task<IEnumerable<Client>> GetAllClientsAsync()
+        public ClientRepository(CatalogueDbContext context)
         {
-            return Task.FromResult(GetAllClients());
+            _context = context;
         }
 
-        public IEnumerable<Client> GetAllClients() => Clients;
-
+        public async Task<IEnumerable<Client>> GetAllClientsAsync()
+        {
+            return await _context.Clients.ToListAsync();
+        }
+        
     }
 }
 

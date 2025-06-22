@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj": {}
+    "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\testsunitaires\\TestsUnitaires.csproj": {}
   },
   "projects": {
-    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
+    "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
+        "projectUniqueName": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
         "projectName": "ApiCatalogue",
-        "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
+        "projectPath": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj",
         "packagesPath": "C:\\Users\\tmagd\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\obj\\",
+        "outputPath": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tmagd\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,6 +49,26 @@
               "target": "Package",
               "version": "[8.0.17, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -77,14 +97,14 @@
         }
       }
     },
-    "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj": {
+    "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\testsunitaires\\TestsUnitaires.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj",
+        "projectUniqueName": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\testsunitaires\\TestsUnitaires.csproj",
         "projectName": "TestsUnitaires",
-        "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\TestsUnitaires.csproj",
+        "projectPath": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\testsunitaires\\TestsUnitaires.csproj",
         "packagesPath": "C:\\Users\\tmagd\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\TestsUnitaires\\obj\\",
+        "outputPath": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\testsunitaires\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tmagd\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -101,8 +121,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
-                "projectPath": "c:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj"
+              "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj": {
+                "projectPath": "C:\\Users\\tmagd\\Documents\\FORMATION_Expert_Thomas\\formation-fullstack-expert-thomas\\backend-dotnet\\semaine1-api-rest\\ApiCatalogue\\ApiCatalogue.csproj"
               }
             }
           }
@@ -122,6 +142,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[8.3.0, )"
+            },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -129,6 +153,14 @@
             "Microsoft.AspNetCore.Mvc.Core": {
               "target": "Package",
               "version": "[2.2.5, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",

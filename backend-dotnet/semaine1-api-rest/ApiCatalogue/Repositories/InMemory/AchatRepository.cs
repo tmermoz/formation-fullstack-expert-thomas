@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using ApiCatalogue.Models;
-using ApiCatalogue.Repositories;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ApiCatalogue.Data;
 
 // <summary>
 // InMemory implementation of the IAchatRepository interface.  
@@ -12,21 +10,17 @@ namespace ApiCatalogue.Repositories.InMemory
 {
     public class AchatRepository : IAchatRepository
     {
-        private static readonly List<Achat> Achats = new()
-        {
-            new Achat { NomClient = "Alice", NomProduit = "Ordinateur portable" },
-            new Achat { NomClient = "Bob", NomProduit = "Smartphone" },
-            new Achat { NomClient = "Claire", NomProduit = "Ordinateur portable" },
-            new Achat { NomClient = "David", NomProduit = "Ecouteurs bluetooth" },
-            new Achat { NomClient = "Alice", NomProduit = "Ecouteurs bluetooth" },
-        };
+        private readonly CatalogueDbContext _context;
 
-        public Task<IEnumerable<Achat>> GetAllAchatsAsync()
+        public AchatRepository(CatalogueDbContext context)
         {
-            return Task.FromResult(GetAllAchats());
+            _context = context;
         }
 
-        public IEnumerable<Achat> GetAllAchats() => Achats;
+        public async Task<IEnumerable<Achat>> GetAllAchatsAsync()
+        {
+            return await _context.Achats.ToListAsync();
+        }
 
     }
 }
