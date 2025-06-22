@@ -9,6 +9,7 @@ using ApiCatalogue.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using FluentAssertions;
 
 namespace TestsUnitaires.Controllers
 {
@@ -41,9 +42,21 @@ namespace TestsUnitaires.Controllers
             // Arrange
             var achats = new List<Achat>
             {
-                new Achat { NomClient = "Alice", NomProduit = "Ordinateur" },
-                new Achat { NomClient = "Bob", NomProduit = "Ordinateur" },
-                new Achat { NomClient = "Alice", NomProduit = "Souris" },
+                new Achat
+                {
+                    Client = new Client { Nom = "Alice" },
+                    Produit = new Produit { Nom = "Ordinateur" }
+                },
+                new Achat
+                {
+                    Client = new Client { Nom = "Bob" },
+                    Produit = new Produit { Nom = "Ordinateur" }
+                },
+                new Achat
+                {
+                    Client = new Client { Nom = "Alice" },
+                    Produit = new Produit { Nom = "Souris" }
+                }
             };
 
             var produits = new List<Produit>
@@ -63,8 +76,13 @@ namespace TestsUnitaires.Controllers
             var data = Assert.IsAssignableFrom<IEnumerable<TopClientDto>>(okResult.Value);
             var list = data.ToList();
 
+
+            list.Should().NotBeNull();
+            list.Should().NotBeEmpty();
+            list!.First().NomClient.Should().Be(""); // ajout du "!" si nécessaire
+
             Assert.Equal(2, list.Count);
-            Assert.Equal("Alice", list[0].NomClient);
+            Assert.Equal("Alice", result.Value.First().NomClient);
             Assert.Equal(1050, list[0].TotalDepense);
             Assert.Equal("Bob", list[1].NomClient);
             Assert.Equal(1000, list[1].TotalDepense);

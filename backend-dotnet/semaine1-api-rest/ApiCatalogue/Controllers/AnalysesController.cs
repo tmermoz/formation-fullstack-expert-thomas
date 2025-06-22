@@ -55,10 +55,10 @@ namespace ApiCatalogue.Controllers
 
             var stats = achats
                 .Join(produits,
-                      achat => achat.NomProduit,
+                      achat => achat.Client.Nom,
                       produit => produit.Nom,
-                      (achat, produit) => new { achat.NomClient, produit.Prix })
-                .GroupBy(x => x.NomClient)
+                      (achat, produit) => new { achat.Client.Nom, produit.Prix })
+                .GroupBy(x => x.Nom)
                 .Select(g => new TopClientDto
                 {
                     NomClient = g.Key,

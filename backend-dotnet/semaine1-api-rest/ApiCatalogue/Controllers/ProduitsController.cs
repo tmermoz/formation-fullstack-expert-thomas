@@ -72,6 +72,9 @@ namespace ApiCatalogue.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Produit>>> GetProduits([FromQuery] string? categorie)
         {
+            if (string.IsNullOrEmpty(categorie))
+                return BadRequest("Catégorie manquante.");
+
             //Console.WriteLine($"categorie : {categorie}");
             _logger.LogInformation("Récupération des produits avec catégorie : {Categorie}", categorie);
 
@@ -83,9 +86,7 @@ namespace ApiCatalogue.Controllers
             }
 
             // Récupère tous les produits via le repository
-            var produitsFiltres = string.IsNullOrEmpty(categorie)
-                ? produits
-                : produits
+            var produitsFiltres = produits
                     .Where(p => p.Categorie.Equals(categorie, StringComparison.OrdinalIgnoreCase))
                     .ToList();
 

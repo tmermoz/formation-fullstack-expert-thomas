@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using FluentAssertions;
+using ApiCatalogue.Data;
+using Microsoft.AspNetCore.Hosting;
 
 namespace TestsUnitaires.IntegrationTests
 {
@@ -19,6 +22,8 @@ namespace TestsUnitaires.IntegrationTests
         {
             _factory = factory.WithWebHostBuilder(builder =>
             {
+                builder.UseEnvironment("Testing");
+
                 builder.ConfigureServices(services =>
                 {
                     // Remplace le contexte SQL par une DB en mémoire
@@ -27,8 +32,9 @@ namespace TestsUnitaires.IntegrationTests
                     if (descriptor != null)
                         services.Remove(descriptor);
 
+                    // ✅ Ajoute le DbContext InMemory
                     services.AddDbContext<CatalogueDbContext>(options =>
-                        options.UseInMemoryDatabase("TestDb"));
+                        options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
 
                     // Seed de données
                     var sp = services.BuildServiceProvider();
@@ -85,6 +91,8 @@ namespace TestsUnitaires.IntegrationTests
         [Fact]
         public async Task PostProduit_ShouldReturnCreatedProduit()
         {
+            var client = _factory.CreateClient();
+
             // Arrange
             var newProduit = new Produit
             {
@@ -94,7 +102,7 @@ namespace TestsUnitaires.IntegrationTests
             };
 
             // Act
-            var response = await _client.PostAsJsonAsync("/api/Produits", newProduit);
+            var response = await client.PostAsJsonAsync("/api/Produits", newProduit);
 
             // Assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
